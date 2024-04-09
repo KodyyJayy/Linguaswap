@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Chat</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        .container {
+            width: 85vw;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 5px;
+        }
+        
+        select, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            outline: none;
+        }
+        
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        #messages {
+            list-style-type: none;
+            margin: 20px 0 0;
+            padding: 0;
+            height: 65vh;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+        }
+        
+        #messages li {
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        
+        #messages li:last-child {
+            margin-bottom: 0;
+        }
+        
+        #message-form {
+           display: flex;
+           flex-direction: row;
+        }
+        
+        #message {
+            margin-right: 10px;
+            margin-left: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            outline: none;
+            height: 50px;
+            width: 80%;
+        }
+        
+        #message:focus {
+            border-color: #007bff;
+        }
+        
+        #message::placeholder {
+            color: #aaa;
+        }
+
+        #end-chat {
+            width: 20%; /* Set width */
+            margin-bottom: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #message-button {
+            width: 20%; /* Set width */
+            margin-bottom: 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #message-button:hover {
+            background-color: #0056b3;
+        }
+        
+        #chat-form {
+            display: none; /* Initially hidden */
+        }
+        
+        #status-message {
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        .you {
+            color: blue;
+            font-weight: bold;
+        }
+        
+        .stranger {
+            color: red;
+            font-weight: bold;
+        }
+        
+        .server {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Language Chat</h1>
+        
+        <form id="language-selection-form">
+            <label for="native-language">Select your native language:</label>
+            <select id="native-language">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <!-- Add other language options here -->
+            </select>
+            
+            <label for="learn-language">Select the language you want to learn:</label>
+            <select id="learn-language">
+                <option value="english">English</option>
+                <option value="spanish">Spanish</option>
+                <!-- Add other language options here -->
+            </select>
+            
+            <button type="submit">Start Chat</button>
+        </form>
+        
+        <div id="chat-form">
+            <ul id="messages"></ul> <!-- Messages list -->
+            <form id="message-form">
+                <button id="end-chat">End Chat</button>
+                <input id="message" autocomplete="off" placeholder="Type your message...">
+                <button id="message-button">Send</button>
+            </form>
+        </div>
+        
+        <div id="status-message"></div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="client.js"></script>
+</body>
+</html>
